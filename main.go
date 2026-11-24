@@ -2,7 +2,7 @@ package main
 
 func main() {
 	// TODO: read from os.Args and add .gitignore
-	var err = createDay(1, "Foobar")
+	var err = createDay()
 
 	if err != nil {
 		panic(err)
