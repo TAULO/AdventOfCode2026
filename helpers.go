@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 )
 
 const template = `package main
@@ -25,8 +27,19 @@ func main() {
 }
 `
 
-func createDay(day int, name string) error {
-	dir := fmt.Sprintf("day_%02d_%s", day, name)
+func createDay() error {
+	day, name := os.Args[1], os.Args[2:]
+	i, err := strconv.Atoi(day)
+
+	if err != nil {
+		return err
+	}
+
+	if len(name) == 0 {
+		return errors.New("'name' is missing")
+	}
+
+	dir := fmt.Sprintf("day_%02d_%s", i, strings.ToLower(strings.Join(name, "_")))
 	files := [3]string{"main.go", "test_input.txt", "input.txt"}
 
 	for part := 1; part <= 2; part++ {
